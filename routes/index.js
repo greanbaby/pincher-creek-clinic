@@ -8,6 +8,8 @@ const express = require('express'),
     router = express.Router();
 router.get("/", (req, res) => {
     const title = "Clinic";
-    res.send(` <html> <head> <title> ${title} </title> <link rel="stylesheet" href="styles.css"></head><body> <h1> ${title} </h1> <p> Running ${title} </p> </body> </html> `);
+    res.render( 'index', {
+        title: 'Clinic with EJS',
     });
+});
 module.exports = router;
