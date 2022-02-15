@@ -2,7 +2,7 @@
   "name": "pincher-creek-clinic",
   "version": "1.0.1",
   "description": "",
-  "main": "app.js",
+  "main": "pc_clinic_app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
