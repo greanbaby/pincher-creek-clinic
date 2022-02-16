@@ -11,6 +11,7 @@ const express = require( 'express' ),
     path = require( 'path' ),
     blogger = require( './middleware/blogger' ),
     bodyParser = require( 'body-parser' ),
+    yields = require( 'express-yields' ),
     index = require( './routes/index' );
 /**
  * 1) PC Clinic APP
@@ -51,6 +52,17 @@ pc_clinic_app.use( express.static( path.join( __dirname, 'public' ) ) );
  * @implements /routes/index
  */
 pc_clinic_app.use( '/', index );
+/**
+ * 6) ERROR HANDLING
+ */
+process.on('uncaughtException', function(err) {
+    console.error(`I've crashed!!! - ${(err.stack || err)}`);
+    process.exit(1);
+});
+process.on('unhandledRejection', (reason, p) => {
+    console.error(`Unhandled Rejection at: ${util.inspect(p)} reason: ${reason}`);
+    process.exit(1);
+});
 /**
  * RUN APP
  * ------------------------------------------------

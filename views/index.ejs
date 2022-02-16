@@ -1,17 +1,11 @@
 <html>
-<head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='styles.css'>
-</head>
-<body>
-    <h1><%= title %></h1>
-        <% if (named) { %>
-            <p>Welcome to <%= title %>, <%= named %></p>
-        <% } else { %>
-            <p>Welcome to <%= title %></p>
-        <% } %>
-    <form method=POST action=data>
-        Name: <input name=named><input type=submit>
-    </form>
-</body>
-</html>
+    <head>
+        <%- include('headerCommon'); %>
+    </head>
+    <body>
+        <h1><%= display.title %></h1>
+        <p>Welcome to <%= display.title %></p>
+        <p>Here is a link to the sheets page:
+            <a href='/sheets'>SHEETS</a>
+        </p>
+    <%- include('footerCommon'); %>

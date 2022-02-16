@@ -4,25 +4,22 @@
  * @author Scott Gingras
  * @since 2022-Feb-15
  */
-const express = require('express'),
-    router = express.Router();
-router.get("/:named?", (req, res) => {
-    const title = 'Express',
-        named = req.params.named;
-    res.render( 'index', {
-        title: title,
-        named: named
-    });
-});
-router.post( '/data', (req, res) => {
-    res.redirect( `/${req.body.named}` );
-});
+const express = require( 'express' ),
+    router = express.Router(),
+    dataHomePage = {};
+/**
+ * Application Home Page '/'
+ * @inner dataHomePage
+ * @member display - object holding display text
+ */
+dataHomePage.display = {
+    title: 'Pincher Creek Clinic',
+};
+/**
+ * Use EJS to render the Home Page with our dataHomePage object fed to it
+ * @requires /views/index.ejs
+ */
+router.get( '/', ( req, res ) => {
+    res.render( 'index', dataHomePage );
+} );
 module.exports = router;
-/*
-router.get("/", (req, res) => {
-    const title = "Clinic";
-    res.render( 'index', {
-        title: 'Clinic with EJS',
-    });
-});
-*/
