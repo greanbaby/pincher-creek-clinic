@@ -4,19 +4,21 @@
     <%- include( 'headerNotes' ); %>
 </head>
 <body>
-    <div>
+    <section class="section">
+        <div class="container">
 
-    <%- include( 'notePageTop' ); %>
-    <h3><%= note ? note.title : "" %></h3>
-    <p><%= note ? note.body : "" %></p>
-    <% if (display.notekey) { %>
-        <hr>
-        <p><a href="/notes/destroy?key=<%= display.notekey %>">Delete</a> |
-            <a href="/notes/edit?key=<%= display.notekey %>"></i>Edit</a>
-        </p>
-    <% } %>
+            <%- include( 'notePageTop' ); %>
+            <h3><%= note ? note.title : "" %></h3>
+            <p><%= note ? note.body : "" %></p>
+            <% if (display.notekey) { %>
+                <hr>
+                <p><a href="/notes/destroy?key=<%= display.notekey %>">Delete</a> |
+                    <a href="/notes/edit?key=<%= display.notekey %>"></i>Edit</a>
+                </p>
+            <% } %>
 
-    </div>
+        </div>
+    </section>
 
     <%- include( 'footerCommon' ); %>
 </body>

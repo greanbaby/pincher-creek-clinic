@@ -1,27 +1,31 @@
+<!DOCTYPE html>
 <html>
     <head>
         <%- include( 'headerCommon' ); %>
     </head>
     <body>
-        <%- include( 'notePageTop' ); %>
+        <section class="section">
+            <div class="container">
+                <%- include( 'notePageTop' ); %>
+                <p class="subtitle">Welcome to <strong><%= display.title %>!</strong></p>
 
-        <p>Welcome to <%= display.title %></p>
+                <p>
+                    <!-- NOTESLIST -->
+                    <% if (noteslist.length > 0) { %>
+                        <ul><%
+                            for (let note of noteslist) {
+                                %><li><a href='/notes/view?key=<%= note.key %>'><%= note.title %></a>
+                                </li><%
+                            }
+                            %></ul>
+                    <% } %>
+                </p>
 
-        <p>
-            <!-- NOTESLIST -->
-            <% if (noteslist.length > 0) { %>
-                <ul><%
-                    for (let note of noteslist) {
-                        %><li><a href='/notes/view?key=<%= note.key %>'><%= note.title %></a>
-                        </li><%
-                    }
-                    %></ul>
-            <% } %>
-        </p>
-
-        <!-- SHEETS -->
-        <p>Here is a link to the sheets page:
-            <a href='/sheets'>SHEETS</a>
-        </p>
+                <!-- SHEETS -->
+                <p class="subtitle">Here is a link to the sheets page:
+                    <a href='/sheets'>SHEETS</a>
+                </p>
+            </div>
+        </section>
 
     <%- include( 'footerCommon' ); %>

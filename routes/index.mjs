@@ -31,13 +31,16 @@ router.get( '/', async ( req, res ) => {
      * @requires NotesStore.keylist
      * @requires NotesStore.read(key)
      */
-    let keylist = await notes.keylist();
-    let keyPromises = keylist.map(key => {
-        return notes.read(key)
-    });
-    let noteslist = await Promise.all(keyPromises);
-    dataHomePage.noteslist = noteslist;
-
+    try {
+        let keylist = await notes.keylist();
+        let keyPromises = keylist.map(key => {
+            return notes.read(key)
+        });
+        let noteslist = await Promise.all(keyPromises);
+        dataHomePage.noteslist = noteslist;
+    } catch( err ) {
+        next( err );
+    }
     // .render INDEX / Home Page using dataHomePage {display, noteslist}
     res.render( 'index', dataHomePage );
 } );
