@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include headerStuffEdit %>
+</head>
+<body>
+    <div class='w3-container'>
+
+    <% include noteHeader %>
+    <h3><%= note ? note.title : "" %></h3>
+    <p><%= note ? note.body : "" %></p>
+    <% if (notekey) { %>
+        <hr>
+        <p><a href="/notes/destroy?key=<%= notekey %>"><i data-feather="trash"></i>Delete</a> |
+            <a href="/notes/edit?key=<%= notekey %>"><i data-feather="edit"></i>Edit</a>
+        </p>
+    <% } %>
+
+    </div>
+
+    <% include noteFooter %>
+</body>
+</html>

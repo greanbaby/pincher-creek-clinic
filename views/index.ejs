@@ -3,13 +3,21 @@
         <%- include( 'headerCommon' ); %>
     </head>
     <body>
-
-        <h1><%= display.title %></h1>
+        <%- include( 'headerPages' ); %>
 
         <p>Welcome to <%= display.title %></p>
 
+        <p>
+            <!-- NOTESLIST -->
+            <% if (noteslist.length > 0) { %>
+                SOMETHINGS!!
+            <% } %>
+
+        </p>
+
+        <!-- SHEETS -->
         <p>Here is a link to the sheets page:
             <a href='/sheets'>SHEETS</a>
         </p>
-        
+
     <%- include( 'footerCommon' ); %>

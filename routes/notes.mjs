@@ -1,10 +1,21 @@
-'use strict';
+/**
+ * /notes router
+ * @name /routes/notes.mjs
+ * @author Scott Gingras
+ * @since 2022-Feb-16
+ */
 import util from 'util';
 import express from 'express';
 import { NotesStore as notes } from '../models/notes-store.mjs';
-
 export const router = express.Router();
-
+/**
+ * Create a random id with length specified
+ * @function makeid
+ * @param length the length of the return random id value
+ * @returns random alphanumeric id with length specified by parameter
+ * @author Scott Gingras
+ * @since 2019-Dec-12
+ */
 function makeid(length) {
     let result = '';
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -14,14 +25,29 @@ function makeid(length) {
     }
     return result;
 }
-// ADD Note
-router.get('/add', (req, res, next) => {
-    res.render('noteedit', {
-        title: "Add a Note",
-        docreate: true,
-        notekey: makeid(24),
-        note: undefined
-    });
+let dataNotesPage = {};  // fill this object with all data fields to pass into EJS template for rendering
+/**
+ * Notes Page display data
+ * @inner dataNotesPage
+ * @member display - field holding display text
+ * @requires null
+ */
+dataNotesPage.display = {
+};
+/**
+ * Use EJS with our dataNotesPage object fed to it
+ * @async
+ * @implements Router.get( '/notes/' )
+ * @requires /views/index.ejs
+ * @requires dataNotesPage
+ */
+// /notes/add
+router.get( '/add', (req, res, next) => {
+    dataNotesPage[ 'display' ].title = 'Add a Note';
+    dataNotesPage[ 'display' ].docreate = true;
+    dataNotesPage[ 'display' ].notekey = makeid( 24 );
+    dataNotesPage.note = undefined;
+    res.render( 'noteedit', dataNotesPage );
 });
 
 // Save Note (update)

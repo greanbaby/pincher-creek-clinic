@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include headerStuffEdit %>
+</head>
+<body>
+    <div class='w3-container'>
+
+    <% include noteHeader %>
+    <form method='POST' action='/notes/destroy/confirm'>
+        <input type='hidden' name='notekey' value='<%=
+            note ? notekey : "" %>'>
+        <p>Delete <%= note.title %>?</p>
+        <br>
+        <input type='submit' value='DELETE'/>
+        <a href='/notes/view?key=<%= notekey %>'>Cancel</a>
+    </form>
+    
+    </div>
+
+    <% include noteFooter %>
+    </body>
+    </html>
