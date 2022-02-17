@@ -26,11 +26,9 @@ function makeid( length ) {
     return result;
 }
 /**
- * Use EJS with our dataNotesPage object fed to it
+ * ADD
  * @implements Router.get( '/notes/add' )
  * @requires /views/noteedit.ejs
- * @inner dataNotesPage
- * @member display - field holding display text
  * @requires makeid
  */
 router.get( '/add', ( req, res, next ) => {
@@ -43,12 +41,12 @@ router.get( '/add', ( req, res, next ) => {
     res.render( 'noteedit', dataNotesPage );
 } );
 /**
- * Use EJS with our dataNotesPage object fed to it
+ * SAVE
  * @async
  * @implements Router.get( '/notes/save' )
  */
 router.post( '/save', async ( req, res, next ) => {
-    var note;
+    let note;
     if ( req.body.docreate === "create" ) {
         note = await notes.create( req.body.notekey, req.body.title, req.body.body );
     } else {
@@ -57,13 +55,13 @@ router.post( '/save', async ( req, res, next ) => {
     res.redirect( '/notes/view?key=' + req.body.notekey );
 } );
 /**
- * Use EJS with our dataNotesPage object fed to it
+ * VIEW
  * @async
  * @implements Router.get( '/notes/view' )
  * @requires /views/noteview.ejs
  */
 router.get( '/view', async ( req, res, next ) => {
-    var note = await notes.read( req.query.key );
+    let note = await notes.read( req.query.key );
     let dataNotesPage = {};
     dataNotesPage.display = {};
     dataNotesPage[ 'display' ].title = note.title;
@@ -71,30 +69,42 @@ router.get( '/view', async ( req, res, next ) => {
     dataNotesPage.note = note;
     res.render( 'noteview', dataNotesPage );
 } );
-
-// Edit note (update)
-router.get('/edit', async (req, res, next) => {
-    var note = await notes.read(req.query.key);
-    res.render('noteedit', {
-            title: note ? ("Edit " + note.title) : "Add a Note",
-            docreate: false,
-            notekey: req.query.key,
-            note: note
-    });
-});
-
-// Ask to Delete note (destroy)
-router.get('/destroy', async (req, res, next) => {
-    var note = await notes.read(req.query.key);
-    res.render('notedestroy', {
-            title: note ? note.title : "",
-            notekey: req.query.key,
-            note: note
-    });
-});
-
-// Really destroy note (destroy)
-router.post('/destroy/confirm', async (req, res, next) => {
-    await notes.destroy(req.body.notekey);
-    res.redirect('/');
-});
+/**
+ * EDIT
+ * @async
+ * @implements Router.get( '/notes/edit' )
+ * @requires /views/noteedit.ejs
+ */
+router.get( '/edit', async ( req, res, next ) => {
+    let note = await notes.read( req.query.key );
+    let dataNotesPage = {};
+    dataNotesPage.display = {};
+    dataNotesPage[ 'display' ].title = 'Edit ' + note.title;
+    dataNotesPage[ 'display' ].notekey = req.query.key;
+    dataNotesPage.note = note;
+    res.render( 'noteedit', dataNotesPage );
+} );
+/**
+ * DELETE CONFIRMATION
+ * @async
+ * @implements Router.get( '/notes/destroy' )
+ * @requires /views/notedestroy.ejs
+ */
+router.get( '/destroy', async (req, res, next) => {
+    let note = await notes.read( req.query.key );
+    let dataNotesPage = {};
+    dataNotesPage.display = {};
+    dataNotesPage[ 'display' ].title = 'Delete ' + note.title;
+    dataNotesPage[ 'display' ].notekey = req.query.key;
+    dataNotesPage.note = note;
+    res.render( 'notedestroy', dataNotesPage );
+} );
+/**
+ * DELETE (DESTROY)
+ * @async
+ * @implements Router.get( '/notes/destroy/confirm' )
+ */
+router.post( '/destroy/confirm', async ( req, res, next ) => {
+    await notes.destroy( req.body.notekey );
+    res.redirect( '/' );
+} );
