@@ -4,11 +4,11 @@
   "description": "",
   "main": "pc_clinic_app.js",
   "scripts": {
-      "start": "node ./pc_clinic_app.mjs",
-      "fs-start": "DEBUG=pincher-creek-clinic:* PORT=3000 NOTES_MODEL=fs node ./pc_clinic_app.mjs",
-      "fs-server1": "NOTES_MODEL=fs PORT=3001 node ./pc_clinic_app.mjs",
-      "fs-server2": "NOTES_MODEL=fs PORT=3002 node ./pc_clinic_app.mjs",
-      "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./pc_clinic_app.mjs",
+    "fs-start": "DEBUG=pincher-creek-clinic:* PORT=3000 NOTES_MODEL=fs nodemon ./pc_clinic_app.mjs",
+    "fs-server1": "NOTES_MODEL=fs PORT=3001 nodemon ./pc_clinic_app.mjs",
+    "fs-server2": "NOTES_MODEL=fs PORT=3002 nodemon ./pc_clinic_app.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "express-yields": "^1.1.2",
     "fs-extra": "^10.0.0",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
     "rotating-file-stream": "^3.0.2"
   }
 }

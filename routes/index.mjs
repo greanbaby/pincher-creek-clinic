@@ -12,7 +12,7 @@ export const router = express.Router();
 // fill dataHomePage with all display data fields to pass into EJS template for rendering
 let dataHomePage = {};
 dataHomePage.display = {
-    title: 'Pincher Creek Clinic',
+    title: 'Pincher Clinic',
 };
 /**
  * Use EJS to render the Home Page with our dataHomePage object fed to it
