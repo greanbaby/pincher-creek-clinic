@@ -6,7 +6,7 @@
 <body>
     <div>
 
-    <%- include( 'headerPages' ); %>
+    <%- include( 'notePageTop' ); %>
     <form method='POST' action='/notes/destroy/confirm'>
         <input type='hidden' name='notekey' value='<%=
             note ? display.notekey : "" %>'>

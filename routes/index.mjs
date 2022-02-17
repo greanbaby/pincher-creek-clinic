@@ -9,14 +9,8 @@ import util from 'util';
 import { NotesStore as notes } from '../models/notes-store.mjs';
 
 export const router = express.Router();
-
-let dataHomePage = {};  // fill this object with all data fields to pass into EJS template for rendering
-/**
- * Home Page display data
- * @inner dataHomePage
- * @member display - field holding display text
- * @requires null
- */
+// fill dataHomePage with all display data fields to pass into EJS template for rendering
+let dataHomePage = {};
 dataHomePage.display = {
     title: 'Pincher Creek Clinic',
 };
