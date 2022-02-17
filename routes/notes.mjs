@@ -16,62 +16,61 @@ export const router = express.Router();
  * @author Scott Gingras
  * @since 2019-Dec-12
  */
-function makeid(length) {
+function makeid( length ) {
     let result = '';
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        result += characters.charAt( Math.floor( Math.random() * charactersLength ) );
     }
     return result;
 }
-let dataNotesPage = {};  // fill this object with all data fields to pass into EJS template for rendering
 /**
- * Notes Page display data
+ * Use EJS with our dataNotesPage object fed to it
+ * @implements Router.get( '/notes/add' )
+ * @requires /views/noteedit.ejs
  * @inner dataNotesPage
  * @member display - field holding display text
- * @requires null
+ * @requires makeid
  */
-dataNotesPage.display = {
-};
+router.get( '/add', ( req, res, next ) => {
+    let dataNotesPage = {};
+    dataNotesPage.display = {};
+    dataNotesPage[ 'display' ].title = 'Add a Note';
+    dataNotesPage[ 'display' ].docreate = true;
+    dataNotesPage[ 'display' ].notekey = makeid( 14 );
+    dataNotesPage.note = undefined;
+    res.render( 'noteedit', dataNotesPage );
+} );
 /**
  * Use EJS with our dataNotesPage object fed to it
  * @async
- * @implements Router.get( '/notes/' )
- * @requires /views/index.ejs
- * @requires dataNotesPage
+ * @implements Router.get( '/notes/save' )
  */
-// /notes/add
-router.get( '/add', (req, res, next) => {
-    dataNotesPage[ 'display' ].title = 'Add a Note';
-    dataNotesPage[ 'display' ].docreate = true;
-    dataNotesPage[ 'display' ].notekey = makeid( 24 );
-    dataNotesPage.note = undefined;
-    res.render( 'noteedit', dataNotesPage );
-});
-
-// Save Note (update)
-router.post('/save', async (req, res, next) => {
+router.post( '/save', async ( req, res, next ) => {
     var note;
-    if (req.body.docreate === "create") {
-        note = await notes.create(req.body.notekey,
-                req.body.title, req.body.body);
+    if ( req.body.docreate === "create" ) {
+        note = await notes.create( req.body.notekey, req.body.title, req.body.body );
     } else {
-        note = await notes.update(req.body.notekey,
-                req.body.title, req.body.body);
+        note = await notes.update( req.body.notekey, req.body.title, req.body.body );
     }
-    res.redirect('/notes/view?key='+ req.body.notekey);
-});
-
-// Read Note (read)
-router.get('/view', async (req, res, next) => {
-    var note = await notes.read(req.query.key);
-    res.render('noteview', {
-            title: note ? note.title : "",
-            notekey: req.query.key,
-            note: note
-    });
-});
+    res.redirect( '/notes/view?key=' + req.body.notekey );
+} );
+/**
+ * Use EJS with our dataNotesPage object fed to it
+ * @async
+ * @implements Router.get( '/notes/view' )
+ * @requires /views/noteview.ejs
+ */
+router.get( '/view', async ( req, res, next ) => {
+    var note = await notes.read( req.query.key );
+    let dataNotesPage = {};
+    dataNotesPage.display = {};
+    dataNotesPage[ 'display' ].title = note.title;
+    dataNotesPage[ 'display' ].notekey = req.query.key;
+    dataNotesPage.note = note;
+    res.render( 'noteview', dataNotesPage );
+} );
 
 // Edit note (update)
 router.get('/edit', async (req, res, next) => {

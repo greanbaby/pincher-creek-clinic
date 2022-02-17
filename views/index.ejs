@@ -10,9 +10,13 @@
         <p>
             <!-- NOTESLIST -->
             <% if (noteslist.length > 0) { %>
-                SOMETHINGS!!
+                <ul><%
+                    for (let note of noteslist) {
+                        %><li><a href='/notes/view?key=<%= note.key %>'><%= note.title %></a>
+                        </li><%
+                    }
+                    %></ul>
             <% } %>
-
         </p>
 
         <!-- SHEETS -->

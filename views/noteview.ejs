@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <% include headerStuffEdit %>
+    <%- include( 'headerNotes' ); %>
 </head>
 <body>
     <div class='w3-container'>
 
-    <% include noteHeader %>
+    <%- include( 'headerPages' ); %>
     <h3><%= note ? note.title : "" %></h3>
     <p><%= note ? note.body : "" %></p>
-    <% if (notekey) { %>
+    <% if (display.notekey) { %>
         <hr>
-        <p><a href="/notes/destroy?key=<%= notekey %>"><i data-feather="trash"></i>Delete</a> |
-            <a href="/notes/edit?key=<%= notekey %>"><i data-feather="edit"></i>Edit</a>
+        <p><a href="/notes/destroy?key=<%= display.notekey %>">Delete</a> |
+            <a href="/notes/edit?key=<%= display.notekey %>"></i>Edit</a>
         </p>
     <% } %>
 
     </div>
 
-    <% include noteFooter %>
+    <%- include( 'footerCommon' ); %>
 </body>
 </html>
