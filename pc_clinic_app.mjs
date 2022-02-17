@@ -22,6 +22,7 @@
  import logger from 'morgan';
  import util from 'util';
  import yields from 'express-yields';
+ import blogger from './middleware/blogger.mjs'
  import { useModel as useNotesModel } from './models/notes-store.mjs';
  import {
      normalizePort, onError, onListening, handle404, basicErrorHandler
@@ -37,6 +38,7 @@
  * @member pc_clinic_app
  */
 const pc_clinic_app = express();
+pc_clinic_app.use( blogger() );
 /**
  * VIEWS
  * ------------------------------------------------

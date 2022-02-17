@@ -1,0 +1,4 @@
+::ffff:127.0.0.1 - - [17/Feb/2022:21:59:02 +0000] "GET / HTTP/1.1" 304 -
+::ffff:127.0.0.1 - - [17/Feb/2022:21:59:28 +0000] "GET /notes/add HTTP/1.1" 200 1344
+::ffff:127.0.0.1 - - [17/Feb/2022:21:59:31 +0000] "POST /notes/save HTTP/1.1" 302 104
+::ffff:127.0.0.1 - - [17/Feb/2022:21:59:31 +0000] "GET /notes/view?key=7rm3nbgfegrxqr HTTP/1.1" 200 932
